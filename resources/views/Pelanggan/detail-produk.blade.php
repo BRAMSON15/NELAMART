@@ -139,7 +139,7 @@
 
                     <!-- Toko -->
                     @if($produk->toko)
-                    <div class="mb-4 p-3" style="background:#f8fafc;border-radius:10px;border-left:3px solid #26b99a;">
+                    <div class="mb-3 p-3" style="background:#f8fafc;border-radius:10px;border-left:3px solid #26b99a;">
                         <div style="font-size:13px;color:#888;margin-bottom:4px;">Dijual oleh</div>
                         <a href="{{ route('toko.show', $produk->toko->id) }}" style="color:#2a3f54;text-decoration:none;font-weight:700;font-size:15px;">
                             <i class="fas fa-store me-2" style="color:#26b99a;"></i>{{ $produk->toko->nama_toko }}
@@ -154,9 +154,9 @@
 
                     <!-- Varian -->
                     @if($produk->varians->count() > 0)
-                    <div class="mb-4">
-                        <div style="font-size:14px;font-weight:600;color:#2a3f54;margin-bottom:10px;">Pilih Varian:</div>
-                        <div class="d-flex flex-wrap gap-2" id="varianButtons">
+                    <div class="mb-3">
+                        <div style="font-size:14px;font-weight:600;color:#2a3f54;margin-bottom:8px;">Pilih Varian:</div>
+                        <div class="d-flex flex-wrap" id="varianButtons" style="gap:8px;margin-bottom:0;">
                             @foreach($produk->varians as $varian)
                             <button type="button" class="btn varian-btn"
                                 data-harga="{{ $produk->harga + $varian->harga_tambahan }}"
@@ -164,10 +164,10 @@
                                 data-id="{{ $varian->id }}"
                                 data-gambar="{{ $varian->gambar ? asset('storage/' . $varian->gambar) : '' }}"
                                 onclick="pilihVarian(this)"
-                                style="border:2px solid #dee2e6;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;color:#2a3f54;background:white;transition:all 0.2s;">
-                                {{ $varian->nama_varian }}
+                                style="border:2px solid #dee2e6;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;color:#2a3f54;background:white;transition:all 0.2s;margin:0;line-height:1.3;display:flex;flex-direction:column;align-items:center;min-width:fit-content;">
+                                <span style="white-space:nowrap;">{{ $varian->nama_varian }}</span>
                                 @if($varian->harga_tambahan > 0)
-                                    <span style="color:#26b99a;font-size:11px;">+Rp {{ number_format($varian->harga_tambahan, 0, ',', '.') }}</span>
+                                    <span style="color:#26b99a;font-size:10px;margin-top:2px;white-space:nowrap;">+Rp {{ number_format($varian->harga_tambahan, 0, ',', '.') }}</span>
                                 @endif
                             </button>
                             @endforeach
@@ -192,20 +192,20 @@
                     </div>
 
                     <div class="d-flex gap-2 flex-wrap">
-                        <form action="{{ route('keranjang.tambah') }}" method="POST" id="formKeranjang">
+                        <form action="{{ route('keranjang.tambah') }}" method="POST" id="formKeranjang" style="margin:0;">
                             @csrf
                             <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                             <input type="hidden" name="jumlah" id="jumlahKeranjang" value="1">
                             <button type="submit" class="btn fw-semibold"
-                                style="background:#f1f5f9;color:#2a3f54;border:2px solid #dee2e6;border-radius:10px;padding:12px 24px;">
+                                style="background:#f1f5f9;color:#2a3f54;border:2px solid #dee2e6;border-radius:10px;padding:12px 24px;margin:0;">
                                 <i class="fas fa-cart-plus me-2"></i> Keranjang
                             </button>
                         </form>
-                        <form action="{{ route('produk.beli', $produk->id) }}" method="POST" id="formBeli">
+                        <form action="{{ route('produk.beli', $produk->id) }}" method="POST" id="formBeli" style="margin:0;">
                             @csrf
                             <input type="hidden" name="jumlah" id="jumlahBeli" value="1">
                             <button type="submit" class="btn fw-semibold text-white"
-                                style="background:linear-gradient(135deg,#26b99a,#1abb9c);border:none;border-radius:10px;padding:12px 28px;">
+                                style="background:linear-gradient(135deg,#26b99a,#1abb9c);border:none;border-radius:10px;padding:12px 28px;margin:0;">
                                 <i class="fas fa-bolt me-2"></i> Beli Sekarang
                             </button>
                         </form>
