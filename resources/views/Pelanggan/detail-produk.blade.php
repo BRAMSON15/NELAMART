@@ -82,10 +82,10 @@
         <div class="row g-4">
             <!-- Gambar Produk -->
             <div class="col-lg-5">
-                <div style="background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+                <div style="background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);display:block;line-height:0;">
                     @if($produk->gambar)
                         <img id="gambarProduk" src="{{ asset('storage/' . $produk->gambar) }}" alt="{{ $produk->nama_produk }}"
-                             style="width:100%;height:420px;object-fit:cover;transition:opacity 0.3s ease;">
+                             style="width:100%;height:420px;object-fit:cover;transition:opacity 0.3s ease;display:block;">
                     @else
                         <div id="gambarProduk" style="width:100%;height:420px;background:linear-gradient(135deg,#2a3f54,#26b99a);display:flex;align-items:center;justify-content:center;font-size:80px;">
                             📦
@@ -96,7 +96,7 @@
 
             <!-- Info Produk -->
             <div class="col-lg-7">
-                <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+                <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
 
                     @if($produk->kategori)
                         <span class="badge mb-2" style="background:rgba(38,185,154,0.12);color:#26b99a;font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;">
@@ -110,7 +110,7 @@
 
                     <!-- Rating ringkas -->
                     @php $avgRating = $produk->ulasans->avg('rating'); @endphp
-                    <div class="d-flex align-items-center gap-2 mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2">
                         <div>
                             @for($i = 1; $i <= 5; $i++)
                                 <i class="fas fa-star" style="color:{{ $i <= round($avgRating) ? '#ffc107' : '#ddd' }};font-size:14px;"></i>
@@ -122,12 +122,12 @@
                     </div>
 
                     <!-- Harga -->
-                    <div style="font-size:2rem;font-weight:800;color:#26b99a;margin-bottom:16px;" id="hargaTampil">
+                    <div style="font-size:2rem;font-weight:800;color:#26b99a;margin-bottom:12px;" id="hargaTampil">
                         Rp {{ number_format($produk->harga, 0, ',', '.') }}
                     </div>
 
                     <!-- Stok -->
-                    <div class="mb-3" style="font-size:14px;">
+                    <div class="mb-2" style="font-size:14px;">
                         @if($produk->stok > 10)
                             <span style="color:#26b99a;"><i class="fas fa-check-circle me-1"></i>Stok tersedia ({{ $produk->stok }})</span>
                         @elseif($produk->stok > 0)
@@ -139,9 +139,9 @@
 
                     <!-- Toko -->
                     @if($produk->toko)
-                    <div class="mb-3 p-3" style="background:#f8fafc;border-radius:10px;border-left:3px solid #26b99a;">
-                        <div style="font-size:13px;color:#888;margin-bottom:4px;">Dijual oleh</div>
-                        <a href="{{ route('toko.show', $produk->toko->id) }}" style="color:#2a3f54;text-decoration:none;font-weight:700;font-size:15px;">
+                    <div class="mb-3 p-2 px-3" style="background:#f8fafc;border-radius:10px;border-left:3px solid #26b99a;">
+                        <div style="font-size:12px;color:#888;margin-bottom:2px;">Dijual oleh</div>
+                        <a href="{{ route('toko.show', $produk->toko->id) }}" style="color:#2a3f54;text-decoration:none;font-weight:700;font-size:14px;">
                             <i class="fas fa-store me-2" style="color:#26b99a;"></i>{{ $produk->toko->nama_toko }}
                         </a>
                         @if($produk->toko->alamat)
@@ -179,16 +179,16 @@
 
                     <!-- Jumlah & Aksi -->
                     @if($produk->stok > 0)
-                    <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-3">
                         <div class="d-flex align-items-center" style="border:2px solid #dee2e6;border-radius:10px;overflow:hidden;">
                             <button type="button" onclick="changeQty(-1)"
-                                style="width:40px;height:40px;border:none;background:#f8fafc;font-size:18px;font-weight:700;color:#2a3f54;cursor:pointer;">−</button>
+                                style="width:38px;height:38px;border:none;background:#f8fafc;font-size:18px;font-weight:700;color:#2a3f54;cursor:pointer;">−</button>
                             <input type="number" id="jumlahInput" value="1" min="1" max="{{ $produk->stok }}"
-                                style="width:56px;height:40px;border:none;text-align:center;font-weight:700;font-size:15px;color:#2a3f54;">
+                                style="width:50px;height:38px;border:none;text-align:center;font-weight:700;font-size:14px;color:#2a3f54;">
                             <button type="button" onclick="changeQty(1)"
-                                style="width:40px;height:40px;border:none;background:#f8fafc;font-size:18px;font-weight:700;color:#2a3f54;cursor:pointer;">+</button>
+                                style="width:38px;height:38px;border:none;background:#f8fafc;font-size:18px;font-weight:700;color:#2a3f54;cursor:pointer;">+</button>
                         </div>
-                        <span style="font-size:13px;color:#888;">Maks. {{ $produk->stok }}</span>
+                        <span style="font-size:12px;color:#888;">Maks. {{ $produk->stok }}</span>
                     </div>
 
                     <div class="d-flex gap-2 flex-wrap">
@@ -197,7 +197,7 @@
                             <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                             <input type="hidden" name="jumlah" id="jumlahKeranjang" value="1">
                             <button type="submit" class="btn fw-semibold"
-                                style="background:#f1f5f9;color:#2a3f54;border:2px solid #dee2e6;border-radius:10px;padding:12px 24px;margin:0;">
+                                style="background:#f1f5f9;color:#2a3f54;border:2px solid #dee2e6;border-radius:10px;padding:10px 20px;margin:0;font-size:14px;">
                                 <i class="fas fa-cart-plus me-2"></i> Keranjang
                             </button>
                         </form>
@@ -205,7 +205,7 @@
                             @csrf
                             <input type="hidden" name="jumlah" id="jumlahBeli" value="1">
                             <button type="submit" class="btn fw-semibold text-white"
-                                style="background:linear-gradient(135deg,#26b99a,#1abb9c);border:none;border-radius:10px;padding:12px 28px;margin:0;">
+                                style="background:linear-gradient(135deg,#26b99a,#1abb9c);border:none;border-radius:10px;padding:10px 24px;margin:0;font-size:14px;">
                                 <i class="fas fa-bolt me-2"></i> Beli Sekarang
                             </button>
                         </form>
