@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background:
+        linear-gradient(135deg, rgba(42,63,84,0.92) 0%, rgba(38,185,154,0.85) 100%),
+        url('../images/bgregis.png') center/cover fixed;
+    min-height: 100vh;
+    padding: 40px 20px;
+    overflow-y: auto;
+}
+
+/* ===== CARD ===== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    background: white;
+    border-radius: 20px;
+    padding: 44px 50px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+}
+
+/* ===== HEADER ===== */
+.reg-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.reg-header .reg-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #26b99a, #2a3f54);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 30px;
+    color: white;
+    box-shadow: 0 8px 20px rgba(38,185,154,0.3);
+}
+
+.reg-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2a3f54;
+    margin-bottom: 8px;
+}
+
+.reg-header p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* ===== GRID ===== */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.form-section {
+    margin-bottom: 28px;
+}
+
+.section-full {
+    margin-top: 8px;
+}
+
+/* ===== SECTION TITLE ===== */
+.section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2a3f54;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title i {
+    color: #26b99a;
+    font-size: 14px;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #2a3f54;
+    margin-bottom: 7px;
+    font-size: 13px;
+}
+
+.required { color: #ef4444; }
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #2a3f54;
+    background: #ffffff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #26b99a;
+    box-shadow: 0 0 0 4px rgba(38,185,154,0.12);
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.help-text {
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* ===== ALERT ===== */
+.alert {
+    background: #fef2f2;
+    border-left: 4px solid #ef4444;
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    color: #991b1b;
+    font-size: 14px;
+}
+
+.alert ul {
+    margin: 8px 0 0 18px;
+}
+
+/* ===== SUBMIT ===== */
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #26b99a, #1abb9c);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 16px rgba(38,185,154,0.35);
+    letter-spacing: 0.3px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(38,185,154,0.45);
+    background: linear-gradient(135deg, #1abb9c, #17a589);
+}
+
+/* ===== LOGIN LINK ===== */
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #26b99a;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.login-link a:hover { color: #1abb9c; }
+
+/* ===== BACK LINK ===== */
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link a {
+    color: #94a3b8;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.back-link a:hover { color: #26b99a; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .container { padding: 28px 20px; }
+    .reg-header h1 { font-size: 22px; }
+}

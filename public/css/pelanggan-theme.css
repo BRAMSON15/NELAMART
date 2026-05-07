@@ -1,0 +1,141 @@
+/* Pelanggan Theme Override - Gentelella Teal Colors */
+
+:root {
+    --primary: #26b99a;
+    --primary-dark: #1abb9c;
+    --secondary: #2a3f54;
+    --accent: #f0a500;
+}
+
+/* Navbar */
+.navbar {
+    background: #2a3f54 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+}
+
+.navbar::after {
+    background: linear-gradient(90deg, transparent, #26b99a, #1abb9c, transparent) !important;
+}
+
+.logo {
+    background: linear-gradient(135deg, #26b99a, #1abb9c) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.nav-menu a {
+    color: rgba(255,255,255,0.85) !important;
+}
+
+.nav-menu a:hover {
+    color: #26b99a !important;
+}
+
+.nav-menu a::after {
+    background: #26b99a !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #26b99a, #1abb9c) !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 20px rgba(38,185,154,0.4) !important;
+}
+
+.btn-outline {
+    color: #26b99a !important;
+    border-color: #26b99a !important;
+}
+
+.btn-outline:hover {
+    background: #26b99a !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(38,185,154,0.3) !important;
+}
+
+.btn-white {
+    background: white !important;
+    color: #26b99a !important;
+}
+
+.btn-detail {
+    background: #26b99a !important;
+}
+
+.btn-detail:hover {
+    background: #1abb9c !important;
+}
+
+/* Stats */
+.stat-number {
+    background: linear-gradient(135deg, #26b99a, #2a3f54) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Section badge */
+.section-badge {
+    background: linear-gradient(135deg, rgba(38,185,154,0.1), rgba(42,63,84,0.1)) !important;
+    color: #26b99a !important;
+}
+
+/* Product card */
+.product-card::before {
+    background: linear-gradient(135deg, rgba(38,185,154,0.08), rgba(42,63,84,0.08)) !important;
+}
+
+.product-card:hover {
+    box-shadow: 0 20px 60px rgba(38,185,154,0.2) !important;
+}
+
+.product-image {
+    background: linear-gradient(135deg, #2a3f54 0%, #26b99a 100%) !important;
+}
+
+.product-category {
+    background: linear-gradient(135deg, rgba(38,185,154,0.1), rgba(42,63,84,0.1)) !important;
+    color: #26b99a !important;
+}
+
+.product-price {
+    background: linear-gradient(135deg, #26b99a, #2a3f54) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, #2a3f54, #26b99a) !important;
+}
+
+/* Welcome Section (dashboardpelanggan) */
+.welcome-section {
+    background: linear-gradient(135deg, #2a3f54 0%, #26b99a 100%) !important;
+}
+
+/* Footer */
+.footer-brand h3 {
+    background: linear-gradient(135deg, #26b99a, #1abb9c) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.social-link:hover {
+    background: #26b99a !important;
+}
+
+/* User dropdown */
+.user-profile-btn {
+    border-color: rgba(38,185,154,0.5) !important;
+}
+
+.dropdown-item:hover {
+    color: #26b99a !important;
+}
