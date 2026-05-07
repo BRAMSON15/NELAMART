@@ -84,10 +84,10 @@
             <div class="col-lg-5">
                 <div style="background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
                     @if($produk->gambar)
-                        <img src="{{ asset('storage/' . $produk->gambar) }}" alt="{{ $produk->nama_produk }}"
-                             style="width:100%;height:420px;object-fit:cover;">
+                        <img id="gambarProduk" src="{{ asset('storage/' . $produk->gambar) }}" alt="{{ $produk->nama_produk }}"
+                             style="width:100%;height:420px;object-fit:cover;transition:opacity 0.3s ease;">
                     @else
-                        <div style="width:100%;height:420px;background:linear-gradient(135deg,#2a3f54,#26b99a);display:flex;align-items:center;justify-content:center;font-size:80px;">
+                        <div id="gambarProduk" style="width:100%;height:420px;background:linear-gradient(135deg,#2a3f54,#26b99a);display:flex;align-items:center;justify-content:center;font-size:80px;">
                             📦
                         </div>
                     @endif
@@ -162,6 +162,7 @@
                                 data-harga="{{ $produk->harga + $varian->harga_tambahan }}"
                                 data-stok="{{ $varian->stok }}"
                                 data-id="{{ $varian->id }}"
+                                data-gambar="{{ $varian->gambar ? asset('storage/' . $varian->gambar) : '' }}"
                                 onclick="pilihVarian(this)"
                                 style="border:2px solid #dee2e6;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;color:#2a3f54;background:white;transition:all 0.2s;">
                                 {{ $varian->nama_varian }}
@@ -172,6 +173,7 @@
                             @endforeach
                         </div>
                         <input type="hidden" id="selectedVarian" value="">
+                        <input type="hidden" id="gambarProdukDefault" value="{{ $produk->gambar ? asset('storage/' . $produk->gambar) : '' }}">
                     </div>
                     @endif
 

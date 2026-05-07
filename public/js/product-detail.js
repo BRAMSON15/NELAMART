@@ -59,12 +59,46 @@ function pilihVarian(btn) {
     const selVar = document.getElementById('selectedVarian');
     const hargaTampil = document.getElementById('hargaTampil');
     const input = document.getElementById('jumlahInput');
+    const gambarProduk = document.getElementById('gambarProduk');
+    const gambarDefault = document.getElementById('gambarProdukDefault');
 
     if (selVar) selVar.value = btn.dataset.id;
     if (hargaTampil) {
         hargaTampil.textContent = 'Rp ' + parseInt(btn.dataset.harga).toLocaleString('id-ID');
     }
     if (input) input.max = btn.dataset.stok;
+    
+    // Change product image if variant has image
+    if (gambarProduk && btn.dataset.gambar) {
+        // Add fade effect
+        gambarProduk.style.opacity = '0';
+        
+        setTimeout(() => {
+            if (btn.dataset.gambar && btn.dataset.gambar !== '') {
+                gambarProduk.src = btn.dataset.gambar;
+            } else if (gambarDefault && gambarDefault.value) {
+                // If variant has no image, use default product image
+                gambarProduk.src = gambarDefault.value;
+            }
+            gambarProduk.style.opacity = '1';
+        }, 150);
+    }
+}
+
+/**
+ * Reset to default product image when no variant selected
+ */
+function resetGambarProduk() {
+    const gambarProduk = document.getElementById('gambarProduk');
+    const gambarDefault = document.getElementById('gambarProdukDefault');
+    
+    if (gambarProduk && gambarDefault && gambarDefault.value) {
+        gambarProduk.style.opacity = '0';
+        setTimeout(() => {
+            gambarProduk.src = gambarDefault.value;
+            gambarProduk.style.opacity = '1';
+        }, 150);
+    }
 }
 
 /**
