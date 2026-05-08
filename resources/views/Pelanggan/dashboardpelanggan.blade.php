@@ -15,15 +15,13 @@
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar" id="navbar" style="position:sticky;top:0;z-index:999;">
     <div class="nav-container">
+        {{-- Logo --}}
         <a href="/" class="logo"><i class="fas fa-store"></i> NELA MART</a>
-        <ul class="nav-menu">
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#produk">Produk</a></li>
-            <li><a href="#pesanan">Pesanan Saya</a></li>
-        </ul>
+
+        {{-- Nav Buttons (Keranjang + User dropdown) --}}
         <div class="nav-buttons">
-            <a href="{{ route('keranjang.index') }}" class="btn btn-outline btn-sm" style="margin-right:12px;">
-                <i class="fas fa-shopping-cart"></i> 
+            <a href="{{ route('keranjang.index') }}" class="btn btn-outline btn-sm">
+                <i class="fas fa-shopping-cart"></i>
                 <span class="btn-text">Keranjang</span>
                 @php $jumlahKeranjang = \App\Models\Keranjang::where('user_id', Auth::id())->count(); @endphp
                 @if($jumlahKeranjang > 0)
@@ -32,7 +30,7 @@
             </a>
             <div class="dropdown" style="position:relative;display:inline-block;">
                 <button class="btn btn-primary btn-sm" onclick="toggleDropdown()" style="cursor:pointer;white-space:nowrap;">
-                    <i class="fas fa-user"></i> 
+                    <i class="fas fa-user"></i>
                     <span class="btn-text">{{ Str::limit(Auth::user()->name, 15) }}</span>
                     <i class="fas fa-chevron-down" style="font-size:10px;margin-left:6px;"></i>
                 </button>
@@ -55,7 +53,18 @@
                 </div>
             </div>
         </div>
-        <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+
+        {{-- Hamburger button (visible on mobile only) --}}
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        {{-- Nav Menu (slides down on mobile when .open) --}}
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#pesanan">Pesanan Saya</a></li>
+        </ul>
     </div>
 </nav>
 
@@ -107,12 +116,12 @@
             <h1 class="display-5 fw-bolder">Produk Rekomendasi</h1>
             <p class="lead fw-normal text-white-50 mb-4">Produk pilihan dari toko UMKM terverifikasi</p>
             <form action="{{ route('pelanggan.dashboard') }}" method="GET" class="d-flex justify-content-center gap-2 flex-wrap">
-                <div class="input-group" style="max-width:380px;s">
+                <div class="input-group search-group" style="max-width:100%; width: 400px;">
                     <input type="text" name="cari" class="form-control form-control-lg"
                            placeholder="Cari produk UMKM..." value="{{ request('cari') }}">
                     <button class="btn btn-primary px-4" type="submit"><i class="fas fa-search"></i></button>
                 </div>
-                <select name="kategori" class="form-select form-select-lg" style="max-width:200px;" onchange="this.form.submit()">
+                <select name="kategori" class="form-select form-select-lg filter-select" style="max-width:100%; width: 200px;" onchange="this.form.submit()">
                     <option value="">Semua Kategori</option>
                     @foreach(['Makanan', 'Minuman', 'Fashion', 'Kerajinan', 'Elektronik', 'Lainnya'] as $kat)
                         <option value="{{ $kat }}" {{ request('kategori') == $kat ? 'selected' : '' }}>{{ $kat }}</option>
