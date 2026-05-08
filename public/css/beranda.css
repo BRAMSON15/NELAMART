@@ -819,8 +819,43 @@ body {
 }
 
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 0 20px;
+    }
+
     .nav-menu {
         display: none;
+    }
+
+    .nav-buttons {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .nav-buttons .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .nav-buttons .btn-text {
+        display: none;
+    }
+
+    .nav-buttons .btn i {
+        margin: 0 !important;
+    }
+
+    .nav-buttons .dropdown button {
+        padding: 8px 12px;
+    }
+
+    #userDropdown {
+        min-width: 160px;
+        right: -10px;
+    }
+
+    .nav-toggle {
+        display: block;
     }
 
     .hero {
@@ -849,6 +884,29 @@ body {
     .hero-shape,
     .cta-shape {
         display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-buttons {
+        order: 3;
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 8px;
+    }
+
+    .nav-container {
+        flex-wrap: wrap;
     }
 }
 

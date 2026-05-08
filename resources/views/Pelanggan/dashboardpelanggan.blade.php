@@ -22,32 +22,34 @@
             <li><a href="#pesanan">Pesanan Saya</a></li>
         </ul>
         <div class="nav-buttons">
-            <a href="{{ route('keranjang.index') }}" class="btn btn-outline btn-sm">
-                <i class="fas fa-shopping-cart"></i> Keranjang
+            <a href="{{ route('keranjang.index') }}" class="btn btn-outline btn-sm" style="margin-right:12px;">
+                <i class="fas fa-shopping-cart"></i> 
+                <span class="btn-text">Keranjang</span>
                 @php $jumlahKeranjang = \App\Models\Keranjang::where('user_id', Auth::id())->count(); @endphp
                 @if($jumlahKeranjang > 0)
-                    <span class="badge bg-danger ms-1" style="font-size:10px;">{{ $jumlahKeranjang }}</span>
+                    <span class="badge bg-danger" style="font-size:10px;margin-left:4px;">{{ $jumlahKeranjang }}</span>
                 @endif
             </a>
             <div class="dropdown" style="position:relative;display:inline-block;">
-                <button class="btn btn-primary btn-sm" onclick="toggleDropdown()" style="cursor:pointer;">
-                    <i class="fas fa-user"></i> {{ Auth::user()->name }}
-                    <i class="fas fa-chevron-down ms-1" style="font-size:10px;"></i>
+                <button class="btn btn-primary btn-sm" onclick="toggleDropdown()" style="cursor:pointer;white-space:nowrap;">
+                    <i class="fas fa-user"></i> 
+                    <span class="btn-text">{{ Str::limit(Auth::user()->name, 15) }}</span>
+                    <i class="fas fa-chevron-down" style="font-size:10px;margin-left:6px;"></i>
                 </button>
-                <div id="userDropdown" style="display:none;position:absolute;right:0;top:110%;background:white;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:180px;z-index:1000;overflow:hidden;">
-                    <a href="{{ route('profil.index') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;">
-                        <i class="fas fa-user me-2" style="color:#26b99a;"></i> Profil Saya
+                <div id="userDropdown" style="display:none;position:absolute;right:0;top:110%;background:white;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:200px;z-index:1000;overflow:hidden;">
+                    <a href="{{ route('profil.index') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                        <i class="fas fa-user me-2" style="color:#26b99a;width:20px;"></i> Profil Saya
                     </a>
-                    <a href="{{ route('pelanggan.dashboard') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;">
-                        <i class="fas fa-star me-2" style="color:#26b99a;"></i> Ulasan Saya
+                    <a href="{{ route('pelanggan.dashboard') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                        <i class="fas fa-star me-2" style="color:#26b99a;width:20px;"></i> Ulasan Saya
                     </a>
-                    <a href="{{ route('chat.admin') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;">
-                        <i class="fas fa-comment me-2" style="color:#26b99a;"></i> Chat Admin
+                    <a href="{{ route('chat.admin') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                        <i class="fas fa-comment me-2" style="color:#26b99a;width:20px;"></i> Chat Admin
                     </a>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" style="margin:0;">
                         @csrf
-                        <button type="submit" style="width:100%;padding:12px 16px;background:none;border:none;text-align:left;color:#ef4444;font-size:14px;cursor:pointer;">
-                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        <button type="submit" style="width:100%;padding:12px 16px;background:none;border:none;text-align:left;color:#ef4444;font-size:14px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='white'">
+                            <i class="fas fa-sign-out-alt me-2" style="width:20px;"></i> Logout
                         </button>
                     </form>
                 </div>
