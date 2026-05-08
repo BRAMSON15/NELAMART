@@ -871,83 +871,75 @@ body {
     }
     .nav-container {
         flex-wrap: wrap;
-        padding: 10px 16px;
-        gap: 0;
+        padding: 8px 12px;
+        gap: 8px;
         align-items: center;
+        justify-content: space-between;
     }
 
     /* --- Logo (row 1 left) --- */
     .logo {
-        font-size: 18px;
+        font-size: 16px;
         flex-shrink: 0;
         order: 1;
     }
-    .logo i { font-size: 15px; }
+    .logo i { font-size: 14px; }
 
-    /* --- Nav buttons (row 1 right, after logo) --- */
-    .nav-buttons {
-        order: 2;
-        margin-left: auto;
-        gap: 12px !important; /* Increased gap for touch */
-        flex-shrink: 0;
-    }
-
-    /* --- Hamburger (row 1 far-right) --- */
-    .nav-toggle {
-        display: flex;
-        order: 3;
-        margin-left: 8px;
-    }
-    .nav-toggle:hover { background: var(--light-gray); }
-    .nav-buttons .btn {
-        padding: 6px 12px !important;
-        font-size: 12px !important;
-        border-radius: 6px !important;
-    }
-    .nav-buttons .dropdown button {
-        padding: 6px 10px !important;
-        font-size: 12px !important;
-    }
-    #userDropdown {
-        min-width: 180px;
-        right: 0;
-    }
-
-    /* --- Nav menu (row 2) --- */
+    /* --- Nav menu (row 1 center) - Always visible --- */
     .nav-menu {
-        display: none; /* Sembunyikan default */
-        width: 100%;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        background: #ffffff;
-        margin: 0 !important;
-        padding: 10px 0 !important;
-        border-top: 1px solid #eee;
+        display: flex !important;
+        order: 2;
+        flex: 1;
+        justify-content: center;
+        gap: 16px;
+        padding: 0;
+        margin: 0;
         list-style: none;
     }
-    .nav-menu.open {
-        display: flex; /* Munculkan saat tombol diklik */
-    }
+    
     .nav-menu li {
-        width: 100%;
+        display: inline-block;
     }
+    
     .nav-menu a {
         display: block;
-        padding: 12px 20px;
+        padding: 6px 10px;
         color: #333 !important;
         font-weight: 600;
+        font-size: 12px;
         text-decoration: none;
-        border-bottom: 1px solid #f9f9f9;
+        border-radius: 6px;
+        transition: all 0.2s;
     }
-    .nav-menu a:hover {
-        background: #f8f9fa;
+    
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background: var(--light-gray);
         color: var(--primary) !important;
     }
-    .nav-menu a:hover {
-        background: var(--light-gray);
-        color: var(--primary);
+    
+    .nav-menu a::after { 
+        display: none; 
     }
-    .nav-menu a::after { display: none; }
+
+    /* --- Nav buttons (row 1 right) --- */
+    .nav-buttons {
+        order: 3;
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+    
+    .nav-buttons .btn {
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+        border-radius: 6px !important;
+    }
+    
+    /* Hide hamburger on mobile since menu is always visible */
+    .nav-toggle {
+        display: none !important;
+    }
 
     /* --- Hero --- */
     .hero {
@@ -997,7 +989,22 @@ body {
    SMALL MOBILE  ≤ 480px
    ────────────────────────────────────────── */
 @media (max-width: 480px) {
-    .logo { font-size: 16px; }
+    .logo { 
+        font-size: 14px;
+    }
+    .logo i {
+        font-size: 13px;
+    }
+
+    /* Nav menu - smaller text on very small screens */
+    .nav-menu {
+        gap: 8px;
+    }
+    
+    .nav-menu a {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
 
     /* Search Form Mobile */
     .search-group, .filter-select {
@@ -1010,10 +1017,19 @@ body {
     }
 
     /* Show only icon on very small screens */
-    .nav-buttons .btn-text { display: none; }
-    .nav-buttons .btn i { margin: 0 !important; }
-    .nav-buttons .btn { padding: 6px 10px !important; }
-    .nav-buttons { gap: 6px !important; margin-right: 8px; }
+    .nav-buttons .btn-text { 
+        display: none; 
+    }
+    .nav-buttons .btn i { 
+        margin: 0 !important; 
+    }
+    .nav-buttons .btn { 
+        padding: 6px 8px !important;
+        min-width: 32px;
+    }
+    .nav-buttons { 
+        gap: 6px !important; 
+    }
 
     .hero h1 { font-size: 24px; }
     .hero-badge { font-size: 12px; padding: 6px 14px; }
@@ -1520,31 +1536,9 @@ body {
 
 
 /* ──────────────────────────────────────────
-   MOBILE FIX - Dropdown & Hero
+   MOBILE FIX - Hero
    ────────────────────────────────────────── */
 @media (max-width: 768px) {
-    /* Fix dropdown positioning */
-    .nav-buttons .dropdown {
-        position: relative;
-    }
-    
-    #userDropdown {
-        position: fixed !important;
-        right: 10px !important;
-        top: 60px !important;
-        left: auto !important;
-        max-width: 200px !important;
-        min-width: 180px !important;
-        z-index: 9999 !important;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
-    }
-
-    #userDropdown a,
-    #userDropdown button {
-        padding: 10px 14px !important;
-        font-size: 13px !important;
-    }
-
     /* Fix hero section */
     .hero {
         background-attachment: scroll !important;
@@ -1642,24 +1636,6 @@ body {
         margin-right: 10px !important;
     }
 
-    #userDropdown {
-        right: 5px !important;
-        top: 55px !important;
-        min-width: 160px !important;
-        max-width: 180px !important;
-        font-size: 12px;
-    }
-
-    #userDropdown a,
-    #userDropdown button {
-        padding: 9px 12px !important;
-        font-size: 12px !important;
-    }
-
-    #userDropdown i {
-        font-size: 12px !important;
-    }
-
     .hero {
         padding: 50px 15px 30px !important;
         min-height: 240px !important;
@@ -1707,5 +1683,120 @@ body {
 
     .stat-label {
         font-size: 0.8rem !important;
+    }
+}
+
+/* ============================================
+   USER DROPDOWN - CLEAN & MOBILE FRIENDLY
+   ============================================ */
+
+.user-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown-btn {
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 10000;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.user-dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    background: white;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item i {
+    color: #26b99a;
+    width: 18px;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+}
+
+.dropdown-item-danger {
+    color: #ef4444 !important;
+}
+
+.dropdown-item-danger i {
+    color: #ef4444 !important;
+}
+
+.dropdown-item-danger:hover {
+    background: #fef2f2 !important;
+}
+
+/* Mobile specific dropdown styles */
+@media (max-width: 768px) {
+    .user-dropdown-menu {
+        position: fixed;
+        right: 10px;
+        top: 60px;
+        min-width: 180px;
+        max-width: 200px;
+    }
+    
+    .dropdown-item {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    .dropdown-item i {
+        width: 16px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-dropdown-menu {
+        right: 5px;
+        top: 55px;
+        min-width: 160px;
+    }
+    
+    .dropdown-item {
+        padding: 9px 12px;
+        font-size: 12px;
     }
 }

@@ -18,6 +18,13 @@
         {{-- Logo --}}
         <a href="/" class="logo"><i class="fas fa-store"></i> NELA MART</a>
 
+        {{-- Nav Menu - Always visible --}}
+        <!-- <ul class="nav-menu">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#pesanan">Pesanan Saya</a></li>
+        </ul> -->
+
         {{-- Nav Buttons (Keranjang + User dropdown) --}}
         <div class="nav-buttons">
             <a href="{{ route('keranjang.index') }}" class="btn btn-outline btn-sm">
@@ -28,43 +35,31 @@
                     <span class="badge bg-danger" style="font-size:10px;margin-left:4px;">{{ $jumlahKeranjang }}</span>
                 @endif
             </a>
-            <div class="dropdown" style="position:relative;display:inline-block;">
-                <button class="btn btn-primary btn-sm" onclick="toggleDropdown()" style="cursor:pointer;white-space:nowrap;">
+            <div class="user-dropdown-wrapper">
+                <button class="btn btn-primary btn-sm user-dropdown-btn" id="userDropdownBtn" type="button" onclick="toggleUserDropdown()">
                     <i class="fas fa-user"></i>
                     <span class="btn-text">{{ Str::limit(Auth::user()->name, 15) }}</span>
                     <i class="fas fa-chevron-down" style="font-size:10px;margin-left:6px;"></i>
                 </button>
-                <div id="userDropdown" style="display:none;position:absolute;right:0;top:110%;background:white;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:200px;z-index:1000;overflow:hidden;">
-                    <a href="{{ route('profil.index') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
-                        <i class="fas fa-user me-2" style="color:#26b99a;width:20px;"></i> Profil Saya
+                <div class="user-dropdown-menu" id="userDropdownMenu">
+                    <a href="{{ route('profil.index') }}" class="dropdown-item">
+                        <i class="fas fa-user"></i> Profil Saya
                     </a>
-                    <a href="{{ route('pelanggan.dashboard') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
-                        <i class="fas fa-star me-2" style="color:#26b99a;width:20px;"></i> Ulasan Saya
+                    <!-- <a href="{{ route('pelanggan.dashboard') }}" class="dropdown-item">
+                        <i class="fas fa-star"></i> Ulasan Saya
+                    </a> -->
+                    <a href="{{ route('chat.admin') }}" class="dropdown-item">
+                        <i class="fas fa-comment"></i> Chat Admin
                     </a>
-                    <a href="{{ route('chat.admin') }}" style="display:block;padding:12px 16px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f1f5f9;transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
-                        <i class="fas fa-comment me-2" style="color:#26b99a;width:20px;"></i> Chat Admin
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}" style="margin:0;">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" style="width:100%;padding:12px 16px;background:none;border:none;text-align:left;color:#ef4444;font-size:14px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='white'">
-                            <i class="fas fa-sign-out-alt me-2" style="width:20px;"></i> Logout
+                        <button type="submit" class="dropdown-item dropdown-item-danger">
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     </form>
                 </div>
             </div>
         </div>
-
-        {{-- Hamburger button (visible on mobile only) --}}
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        {{-- Nav Menu (slides down on mobile when .open) --}}
-        <ul class="nav-menu" id="navMenu">
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#produk">Produk</a></li>
-            <li><a href="#pesanan">Pesanan Saya</a></li>
-        </ul>
     </div>
 </nav>
 
@@ -266,6 +261,55 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('js/app-navbar.js') }}"></script>
+<script>
+// Global function untuk toggle dropdown
+function toggleUserDropdown() {
+    const menu = document.getElementById('userDropdownMenu');
+    if (menu) {
+        menu.classList.toggle('show');
+        console.log('Dropdown toggled via onclick');
+    }
+}
+
+// Backup inline script untuk dropdown
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownBtn = document.getElementById('userDropdownBtn');
+    const dropdownMenu = document.getElementById('userDropdownMenu');
+    
+    console.log('DOM loaded. Elements found:', {
+        btn: !!dropdownBtn,
+        menu: !!dropdownMenu
+    });
+    
+    if (dropdownBtn && dropdownMenu) {
+        // Toggle dropdown on button click (backup jika onclick tidak jalan)
+        dropdownBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+            console.log('Dropdown toggled via event listener');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.user-dropdown-wrapper')) {
+                if (dropdownMenu.classList.contains('show')) {
+                    dropdownMenu.classList.remove('show');
+                    console.log('Dropdown closed by outside click');
+                }
+            }
+        });
+        
+        // Prevent dropdown from closing when clicking inside
+        dropdownMenu.addEventListener('click', function(e) {
+            // Don't stop propagation for logout button
+            if (!e.target.closest('form')) {
+                e.stopPropagation();
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>
 
