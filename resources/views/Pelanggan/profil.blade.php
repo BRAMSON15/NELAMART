@@ -70,7 +70,7 @@
 
 <!-- ===== STATS PESANAN ===== -->
 <section class="stats">
-    <div class="stats-container stats-profile">
+    <div class="stats-container">
         <div class="stat-item">
             <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
             <div class="stat-number">{{ \App\Models\Pesanan::where('user_id', Auth::id())->count() }}</div>
