@@ -102,6 +102,13 @@
                                 value="{{ old('telepon_penerima') }}" required placeholder="08xxxxxxxxxx"
                                 style="border-radius:10px;border:2px solid #e2e8f0;">
                         </div>
+
+                        @if($gunakanRajaongkir)
+                        <!-- Hanya tampilkan jika toko menggunakan RajaOngkir -->
+                        <div class="alert alert-info mb-3" style="border-radius:10px;border:2px solid #d1ecf1;background:#d1ecf1;">
+                            <i class="fas fa-info-circle"></i> <strong>{{ $tokoRajaongkir->nama_toko }}</strong> menggunakan jasa pengiriman RajaOngkir
+                        </div>
+                        
                         <div class="mb-3">
                             <label class="form-label fw-semibold" style="color:#2a3f54;font-size:13px;">Provinsi</label>
                             <select name="provinsi" id="provinsi" class="form-select" required style="border-radius:10px;border:2px solid #e2e8f0;">
@@ -110,15 +117,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold" style="color:#2a3f54;font-size:13px;">Kota/Kabupaten</label>
-                            <select name="kota" id="kota" class="form-select" {{ $gunakanRajaongkir ? 'required' : '' }} style="border-radius:10px;border:2px solid #e2e8f0;" {{ $gunakanRajaongkir ? 'disabled' : '' }}>
+                            <select name="kota" id="kota" class="form-select" required style="border-radius:10px;border:2px solid #e2e8f0;" disabled>
                                 <option value="">Pilih Kota/Kabupaten</option>
                             </select>
-                        </div>
-
-                        @if($gunakanRajaongkir)
-                        <!-- Hanya tampilkan jika toko menggunakan RajaOngkir -->
-                        <div class="alert alert-info mb-3">
-                            <i class="fas fa-info-circle"></i> <strong>{{ $tokoRajaongkir->nama_toko }}</strong> menggunakan jasa pengiriman RajaOngkir
                         </div>
                         
                         <div class="mb-3">
@@ -139,7 +140,7 @@
                         </div>
                         @else
                         <!-- Jika tidak menggunakan RajaOngkir, ongkir = 0 -->
-                        <div class="alert alert-success mb-3">
+                        <div class="alert alert-success mb-3" style="border-radius:10px;border:2px solid #d4edda;background:#d4edda;">
                             <i class="fas fa-check-circle"></i> Toko ini tidak menggunakan jasa pengiriman RajaOngkir. <strong>Ongkir ditanggung penjual atau COD.</strong>
                         </div>
                         <input type="hidden" name="ongkos_kirim" value="0">
