@@ -267,8 +267,8 @@
                     Penjual</a>
                  <a href="{{ route('user.login') }}" class="btn btn-white btn-hero"><i class="fas fa-sign-in-alt"></i> Login Sebagai
                     Penjual</a>
-                <a href="{{ route('pelanggan.login') }}" class="btn btn-outline-white btn-hero"><i class="fas fa-shopping-bag"></i>
-                    Mulai Belanja</a>
+                <!-- <a href="{{ route('pelanggan.login') }}" class="btn btn-outline-white btn-hero"><i class="fas fa-shopping-bag"></i>
+                    Mulai Belanja</a> -->
             </div>
         </div>
     </section>
